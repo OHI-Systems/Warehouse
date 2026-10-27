@@ -54,12 +54,38 @@ main{padding-top:29px}.page-title h1{font-size:26px;letter-spacing:-.3px}.page-t
 @font-face{font-family:OHI-Montserrat;src:url("assets/fonts/agc-light.ttf") format("truetype");font-style:normal;font-weight:300;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
 @font-face{font-family:OHI-Montserrat;src:url("assets/fonts/agc-regular.ttf") format("truetype");font-style:normal;font-weight:400 500;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
 @font-face{font-family:OHI-Montserrat;src:url("assets/fonts/agc-bold.ttf") format("truetype");font-style:normal;font-weight:600 900;font-display:swap;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+FB50-FDFF,U+FE70-FEFF}
+/* Refined institute identity and layout */
+.top{direction:rtl;min-height:112px;padding:10px 0;gap:24px;justify-content:space-between;align-items:center}
+.brand-copy{direction:rtl;text-align:right;display:grid;gap:3px;flex:0 1 auto;margin-inline-end:auto}
+.brand-copy b{font-size:20px;font-weight:700;line-height:1.35;letter-spacing:0}
+.brand-copy .connection-line{display:flex;align-items:center;gap:8px;color:#d8e8e8;font-size:12px;margin-top:2px}
+.brand-copy .institute-name{color:#b8d0d3;font-size:10px;margin-top:1px}
+.brand-logo{display:block;flex:0 0 auto;width:150px;height:94px;object-fit:contain;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;filter:drop-shadow(0 5px 9px #061f2933);animation:logoDrift 5.5s ease-in-out infinite}
+.top-actions{direction:rtl;display:flex;align-items:center;gap:10px}
+.who{color:#e1eeee;font-weight:600}
+nav{justify-content:center;gap:9px;padding-bottom:14px}
+nav button{padding-inline:15px}
+.metric{text-align:center}
+.metric small,.metric strong{width:100%;text-align:center}
+.view.active{animation:viewEnter .36s ease both}
+.metric,.panel{animation:cardEnter .48s cubic-bezier(.2,.7,.2,1) both}
+.metric:nth-child(2){animation-delay:.04s}.metric:nth-child(3){animation-delay:.08s}.metric:nth-child(4){animation-delay:.12s}
+.panel-head{align-items:center}
+.table-wrap{box-shadow:inset 0 1px #ffffff}
+.btn:active,.refresh:active,.logout:active{transform:translateY(1px) scale(.99)}
+header:before{animation:haloDrift 16s ease-in-out infinite alternate}
+@keyframes viewEnter{from{opacity:.45;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes cardEnter{from{opacity:.65;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes logoDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes haloDrift{from{transform:translate3d(-5px,0,0)}to{transform:translate3d(18px,12px,0)}}
+@media(max-width:900px){.top{direction:rtl;min-height:96px;padding:12px 0;flex-wrap:nowrap}.brand-logo{width:128px;height:82px}.top-actions{margin:0}.brand-copy b{font-size:18px}}
+@media(max-width:600px){.top{min-height:0;flex-wrap:wrap;gap:8px 12px;padding:11px 0}.brand-copy{width:calc(100% - 104px);order:1}.brand-copy b{font-size:16px}.brand-copy .connection-line{font-size:11px}.brand-copy .institute-name{font-size:9px}.brand-logo{order:2;width:92px;height:62px}.top-actions{order:3;flex:1 0 100%;justify-content:flex-start}.who{max-width:none}nav{justify-content:flex-start}.metric{text-align:right}.metric small,.metric strong{text-align:right}}
 </style>
 </head>
 <body>
 <section class="login-screen" id="loginScreen">
   <form class="login-card" id="loginForm">
-    <img class="login-logo" src="assets/ohi-institute-logo.png" alt="شعار المعهد العالي للعلوم الإدارية بأوسيم"><h1>نظام المخازن والعهد</h1>
+    <img class="login-logo" src="assets/ohi-institute-logo-transparent.png" alt="شعار المعهد العالي للعلوم الإدارية بأوسيم"><h1>نظام المخازن والعهد</h1>
     <p>إدارة الأصناف والأرصدة والتوريدات وطلبات الصرف والجرد والعهد من مكان واحد.</p>
     <div class="stack">
       
@@ -73,7 +99,7 @@ main{padding-top:29px}.page-title h1{font-size:26px;letter-spacing:-.3px}.page-t
 </section>
 <div id="app" hidden>
 <header><div class="shell">
-  <div class="top"><div class="brand"><img class="brand-logo" src="assets/ohi-institute-logo.png" alt="شعار المعهد العالي للعلوم الإدارية بأوسيم"><div class="brand-copy"><b>نظام المخازن والعهد</b><small>المعهد العالي للعلوم الإدارية بأوسيم</small></div></div><div class="top-actions"><span class="status-line"><i class="dot online"></i> متصل بالشيت</span><span class="who" id="who"></span><button class="logout" id="logout">خروج</button></div></div>
+  <div class="top"><div class="brand-copy"><b>نظام المخازن والعهد</b><small class="connection-line"><i class="dot online"></i> متصل بالشيت</small><small class="institute-name">المعهد العالي للعلوم الإدارية بأوسيم</small></div><div class="top-actions"><span class="who" id="who"></span><button class="logout" id="logout">خروج</button></div><img class="brand-logo" src="assets/ohi-institute-logo-transparent.png" alt="شعار المعهد العالي للعلوم الإدارية بأوسيم"></div>
   <nav id="nav"><button class="active" data-view="dashboard">لوحة المتابعة</button><button data-view="items">الأصناف والأرصدة</button><button data-view="receipts">التوريد</button><button data-view="requests">طلبات الصرف</button><button data-view="inspection">الجرد والفحص</button><button data-view="custody">العهدة</button></nav>
 </div></header>
 <main class="shell">
@@ -136,6 +162,7 @@ $('#assetForm').addEventListener('submit',e=>{e.preventDefault();submitForm(e.cu
 $('#assetMoveForm').addEventListener('submit',e=>{e.preventDefault();submitForm(e.currentTarget,'updateAsset')});
 </script>
 </body></html>
+
 
 
 
