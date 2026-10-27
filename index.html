@@ -123,7 +123,7 @@ async function requestStatus(requestId,status){try{await api('requestStatus',{re
 function activateView(name){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+name));document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===name));window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('#nav button').forEach(b=>b.addEventListener('click',()=>activateView(b.dataset.view)));
 document.querySelectorAll('[data-refresh]').forEach(b=>b.addEventListener('click',async()=>{try{await loadData();toast('تم تحديث البيانات.')}catch(e){toast(e.message,true)}}));
-$('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const button=$('#loginButton'),err=$('#loginError');button.disabled=true;err.textContent='';state.apiUrl=$('#apiUrl').value.trim();state.accessCode=$('#accessCode').value;state.actor=$('#actorName').value.trim();try{const data=await api('snapshot');state.data=data;sessionStorage.setItem('wh_actor',state.actor);localStorage.setItem('wh_url',state.apiUrl);$('#loginScreen').hidden=true;$('#app').hidden=false;$('#who').textContent=state.actor;render();button.disabled=false}catch(ex){err.textContent=ex.message;button.disabled=false}});
+$('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const button=$('#loginButton'),err=$('#loginError');button.disabled=true;err.textContent='';state.accessCode=$('#accessCode').value;state.actor=$('#actorName').value.trim();try{const data=await api('snapshot');state.data=data;sessionStorage.setItem('wh_actor',state.actor);localStorage.setItem('wh_url',state.apiUrl);$('#loginScreen').hidden=true;$('#app').hidden=false;$('#who').textContent=state.actor;render();button.disabled=false}catch(ex){err.textContent=ex.message;button.disabled=false}});
 const savedUrl=localStorage.getItem('wh_url')||sessionStorage.getItem('wh_url')||'';if(savedUrl){state.apiUrl=savedUrl;localStorage.setItem('wh_url',savedUrl)}const savedActor=localStorage.getItem('wh_actor')||sessionStorage.getItem('wh_actor');if(savedActor)document.querySelector('#actorName').value=savedActor;
 $('#logout').addEventListener('click',()=>{sessionStorage.removeItem('wh_actor');state.accessCode='';document.getElementById('loginButton').disabled=false;$('#accessCode').value='';$('#app').hidden=true;$('#loginScreen').hidden=false});
 async function submitForm(form,action,after){const button=form.querySelector('button[type="submit"]');button.disabled=true;try{await api(action,readForm(form));form.reset();await loadData();if(after)after();toast('تم الحفظ بنجاح.')}catch(e){toast(e.message,true)}finally{button.disabled=false}}
@@ -135,6 +135,8 @@ $('#assetForm').addEventListener('submit',e=>{e.preventDefault();submitForm(e.cu
 $('#assetMoveForm').addEventListener('submit',e=>{e.preventDefault();submitForm(e.currentTarget,'updateAsset')});
 </script>
 </body></html>
+
+
 
 
 
